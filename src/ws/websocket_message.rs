@@ -66,7 +66,7 @@ pub struct WebSocketMessage {
     pub response: Option<WebSocketResponseMessage>,
 }
 
-#[allow(non_snake_case)]
+#[allow(non_snake_case, clippy::upper_case_acronyms)]
 pub mod webSocketMessage {
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]

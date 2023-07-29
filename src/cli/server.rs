@@ -6,7 +6,7 @@ fn usage() {
         "
 Usage: {} server
 ",
-        env::args().nth(0).unwrap()
+        env::args().next().unwrap()
     );
 }
 

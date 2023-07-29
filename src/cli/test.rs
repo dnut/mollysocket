@@ -8,8 +8,8 @@ Usage:
 {} test endpoint https://push.server.ltd/id
 {} test uuid aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
 ",
-        env::args().nth(0).unwrap(),
-        env::args().nth(0).unwrap(),
+        env::args().next().unwrap(),
+        env::args().next().unwrap(),
     );
 }
 
@@ -32,7 +32,6 @@ pub async fn test(args: Args) {
         Some(cmd) if cmd == "uuid" || cmd == "u" => test_uuid(&arg),
         _ => {
             usage();
-            return;
         }
     }
 }

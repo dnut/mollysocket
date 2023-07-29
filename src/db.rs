@@ -39,7 +39,7 @@ impl From<&OptTime> for u64 {
 
 impl From<u64> for OptTime {
     fn from(i: u64) -> OptTime {
-        if i <= 0 {
+        if i == 0 {
             return OptTime(None);
         }
         let duration = Duration::from_secs(i);
@@ -96,13 +96,12 @@ CREATE TABLE IF NOT EXISTS connections(
     }
 
     pub fn list(&self) -> Result<Vec<Connection>> {
-        Ok(self
-            .db
+        self.db
             .lock()
             .unwrap()
             .prepare("SELECT * FROM connections;")?
             .query_and_then([], Connection::map)?
-            .collect::<Result<Vec<Connection>>>()?)
+            .collect::<Result<Vec<Connection>>>()
     }
 
     pub fn get(&self, uuid: &str) -> Result<Connection> {
@@ -147,6 +146,6 @@ mod tests {
             .iter()
             .map(|co| &co.uuid)
             .any(|row_uuid| row_uuid == uuid));
-        db.rm(&uuid).unwrap();
+        db.rm(uuid).unwrap();
     }
 }

@@ -14,7 +14,7 @@ Commands:
   list
   rm [uuid]
 ",
-        env::args().nth(0).unwrap()
+        env::args().next().unwrap()
     );
 }
 
@@ -27,8 +27,8 @@ pub async fn connection(args: Args) {
         Some(cmd) if cmd == "add" || cmd == "a" => add(argv).await,
         Some(cmd) if cmd == "rm" || cmd == "r" => rm(argv),
         Some(cmd) if cmd == "list" || cmd == "l" => list(),
-        _ => return usage(),
-    };
+        _ => usage(),
+    }
 }
 
 async fn add(mut argv: Vec<String>) {
@@ -59,8 +59,7 @@ async fn add(mut argv: Vec<String>) {
         _ => {
             return usage();
         }
-    }
-    .clone();
+    };
     let password = match argv.get(2) {
         Some(argv3) => argv3,
         _ => {
@@ -124,8 +123,5 @@ fn rm(mut argv: Vec<String>) {
 }
 
 fn is_valid_int(value: &str) -> bool {
-    match value.parse::<u32>() {
-        Ok(_) => true,
-        Err(_) => false,
-    }
+    value.parse::<u32>().is_ok()
 }

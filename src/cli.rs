@@ -17,7 +17,7 @@ Commands:
 
 Run '{0} [command] --help' for more information on a command.
 ",
-        env::args().nth(0).unwrap()
+        env::args().next().unwrap()
     );
 }
 

@@ -10,7 +10,7 @@ Strategies:
   rest        Send all messages
   websocket   Send all messages at least 5 seconds apart
 ",
-        env::args().nth(0).unwrap()
+        env::args().next().unwrap()
     );
 }
 
